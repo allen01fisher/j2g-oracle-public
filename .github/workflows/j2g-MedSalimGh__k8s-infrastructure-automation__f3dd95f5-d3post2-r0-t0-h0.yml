@@ -1,17 +1,14 @@
-name: CI
-env:
-  NEXUS_REGISTRY: j2g-redacted
-  NEXUS_USER: j2g-redacted
-  NEXUS_PASS: j2g-redacted
-  APP_NAME: j2g-redacted
-  SERVICES_HOST: j2g-redacted
-  K8S_MASTER: j2g-redacted
-  J2G_RUN_ID: MedSalimGh__k8s-infrastructure-automation__f3dd95f5-d3post2-r0-t0-h0
-  J2G_SCENARIO_ID: MedSalimGh__k8s-infrastructure-automation__f3dd95f5-d3post2-r0-t0-h0
-  J2G_FAULTS: verify_deployment
+name: Jenkinsfile Migration
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXUS_REGISTRY: j2g-redacted
+      NEXUS_USER: j2g-redacted
+      NEXUS_PASS: j2g-redacted
+      APP_NAME: j2g-redacted
+      SERVICES_HOST: j2g-redacted
+      K8S_MASTER: j2g-redacted
     steps:
     - name: j2g-probe-install
       env:
@@ -31,11 +28,14 @@ jobs:
     - name: Verify Deployment
       run: j2g_op verify_deployment
     - name: Post success
-      id: post_success
-      if: ${{ success() }}
+      if: success()
       run: j2g_op post_success
     - name: Post failure
-      if: ${{ failure() && steps.post_success.outcome != 'failure' }}
+      if: failure()
       run: j2g_op post_failure
+env:
+  J2G_RUN_ID: MedSalimGh__k8s-infrastructure-automation__f3dd95f5-d3post2-r0-t0-h0
+  J2G_SCENARIO_ID: MedSalimGh__k8s-infrastructure-automation__f3dd95f5-d3post2-r0-t0-h0
+  J2G_FAULTS: verify_deployment
 'on':
   workflow_dispatch: null
