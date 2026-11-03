@@ -1,0 +1,82 @@
+name: Jenkinsfile to GitHub Actions
+env:
+  SLACK_CHANNEL: j2g-redacted
+  AWS_ECR_REPOSITORY: j2g-redacted
+  AWS_DEFAULT_REGION: ap-northeast-2
+  AWS_REGION: ap-northeast-2
+  J2G_RUN_ID: kristyJinny__react-town__16d83406-d3rest-r0-build_feedback-i2-build1
+  J2G_FAULTS: ''
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+    - name: j2g-probe-install
+      env:
+        J2G_OP_B64: IyEvdXNyL2Jpbi9lbnYgYmFzaAojIEZyYW1ld29yayB0ZXN0IGRvdWJsZTogcmVjb3JkcyBvbmUgaW5zdHJ1bWVudGVkIG9wZXJhdGlvbiBldmVudC4Kc2V0IC1vIHBpcGVmYWlsCm9wPSIkMSI7IHNoaWZ0IHx8IHRydWUKcmVhZHM9IiI7IHdyaXRlcz0iIjsgcmVxdWVzdD0iIgp3aGlsZSBbICQjIC1ndCAwIF07IGRvCiAgY2FzZSAiJDEiIGluCiAgICAtLXJlYWRzKSByZWFkcz0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLXdyaXRlcykgd3JpdGVzPSIkMiI7IHNoaWZ0IDIgOzsKICAgIC0tcmVxdWVzdCkgcmVxdWVzdD0iJDIiOyBzaGlmdCAyIDs7CiAgICAqKSBzaGlmdCA7OwogIGVzYWMKZG9uZQpjbG9ja19zb3VyY2U9d2FsbDsgY2xvY2tfZG9tYWluPSIiCmlmIFsgLXIgL3Byb2MvdXB0aW1lIF0gJiYgY29tbWFuZCAtdiBhd2sgPi9kZXYvbnVsbCAmJiBjb21tYW5kIC12IGhvc3RuYW1lID4vZGV2L251bGw7IHRoZW4KICBjbG9ja19zb3VyY2U9bW9ub3RvbmljCiAgaG9zdD0kKGhvc3RuYW1lKQogIGlmIFsgLW4gIiR7R0lUSFVCX0pPQjotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImdoYToke0dJVEhVQl9KT0J9OiRob3N0IjsgZmkKICBpZiBbIC1uICIke05PREVfTkFNRTotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImplbmtpbnM6JHtOT0RFX05BTUV9OiRob3N0IjsgZmkKZmkKbm93KCkgewogIGlmIFsgIiRjbG9ja19zb3VyY2UiID0gbW9ub3RvbmljIF07IHRoZW4gYXdrICd7cHJpbnQgJDF9JyAvcHJvYy91cHRpbWUKICBlbHNlIGRhdGUgKyVzLiVOOyBmaQp9CnN0YXJ0PSQobm93KTsgc3RhdHVzPXN1Y2Nlc3M7IHJkPSIiOyB3cj0iIjsgb3JpZ2lucz0iIjsgYWxsPSIiOyBjb2xsZWN0aW9uX2Vycm9ycz0iIgpbIC1uICIke0oyR19SVU5fSUQ6LX0iIF0gfHwgc3RhdHVzPWZhaWx1cmUKaW5zdGFuY2U9IiRvcC0ke0oyR19SVU5fSUQ6LXJ1bn0tJChkYXRlICslcyVOKS0kJC0kUkFORE9NIgpwcm9kdWNlcl9pbnN0YW5jZT0iIjsgcHJvZHVjZXJfcnVuPSIiCklGUz0sIHJlYWQgLXJhIFIgPDw8ICIkcmVhZHMiCmZvciBwIGluICIke1JbQF19IjsgZG8KICBbIC16ICIkcCIgXSAmJiBjb250aW51ZQogIGlmIFsgLWYgIiRwIiBdOyB0aGVuCiAgICBpZiBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICByZD0iJHJkXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBjb2xsZWN0aW9uX2Vycm9ycz0iJGNvbGxlY3Rpb25fZXJyb3JzXCIkcFwiLCIKICAgIGZpCiAgICBJRlM9JCdcdCcgcmVhZCAtciBtYXJrZXIgb3JpZ2luX3J1biBvcmlnaW5fb3Agb3JpZ2luX2luc3RhbmNlIDwgIiRwIiB8fCB0cnVlCiAgICBpZiBbICIkbWFya2VyIiA9IEoyR19PUklHSU4gXSAmJiBbIC1uICIkb3JpZ2luX2luc3RhbmNlIiBdOyB0aGVuCiAgICAgIG9yaWdpbnM9IiRvcmlnaW5zXCIkcFwiOntcInJ1bl9pZFwiOlwiJG9yaWdpbl9ydW5cIixcIm9wZXJhdGlvbl9pZFwiOlwiJG9yaWdpbl9vcFwiLFwib3BlcmF0aW9uX2luc3RhbmNlX2lkXCI6XCIkb3JpZ2luX2luc3RhbmNlXCJ9LCIKICAgICAgcHJvZHVjZXJfaW5zdGFuY2U9IiRvcmlnaW5faW5zdGFuY2UiOyBwcm9kdWNlcl9ydW49IiRvcmlnaW5fcnVuIgogICAgICBbICIkb3JpZ2luX3J1biIgPSAiJHtKMkdfUlVOX0lEOi19IiBdIHx8IHN0YXR1cz1mYWlsdXJlCiAgICBmaQogIGVsc2UgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBmaQpkb25lCmNhc2UgIiwke0oyR19GQVVMVFM6LX0sIiBpbiAqIiwkb3AsIiopIHN0YXR1cz1mYWlsdXJlIDs7IGVzYWMKaWYgWyAiJHN0YXR1cyIgPSBzdWNjZXNzIF07IHRoZW4KICBJRlM9LCByZWFkIC1yYSBXciA8PDwgIiR3cml0ZXMiCiAgZm9yIHAgaW4gIiR7V3JbQF19IjsgZG8KICAgIFsgLXogIiRwIiBdICYmIGNvbnRpbnVlCiAgICBpZiBta2RpciAtcCAiJChkaXJuYW1lICIkcCIpIiAmJgogICAgICAgcHJpbnRmICdKMkdfT1JJR0lOXHQlc1x0JXNcdCVzXG4nICIkSjJHX1JVTl9JRCIgIiRvcCIgIiRpbnN0YW5jZSIgPiAiJHAiICYmCiAgICAgICBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICB3cj0iJHdyXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgc3RhdHVzPWZhaWx1cmU7IGNvbGxlY3Rpb25fZXJyb3JzPSIkY29sbGVjdGlvbl9lcnJvcnNcIiRwXCIsIgogICAgZmkKICBkb25lCmZpCnJlcXVlc3RfanNvbj1udWxsCmlmIFsgLW4gIiRyZXF1ZXN0IiBdICYmIFsgIiRzdGF0dXMiID0gc3VjY2VzcyBdOyB0aGVuCiAgcmVxdWVzdF9qc29uPSJ7XCJraW5kXCI6XCIke3JlcXVlc3QlJToqfVwiLFwidGFyZ2V0XCI6XCIke3JlcXVlc3QjKjp9XCJ9IgpmaQpkaWdlc3Q9JChwcmludGYgJyVzJyAiJGFsbCIgfCBzaGEyNTZzdW0gfCBjdXQgLWMxLTE2KQplY2hvICJKMkdfUFJPQkUge1wib3BlcmF0aW9uX2lkXCI6XCIkb3BcIixcIm9wZXJhdGlvbl9pbnN0YW5jZV9pZFwiOlwiJGluc3RhbmNlXCIsXCJydW5faWRcIjpcIiR7SjJHX1JVTl9JRDotfVwiLFwic2NlbmFyaW9faWRcIjpcIiR7SjJHX1NDRU5BUklPX0lEOi19XCIsXCJzdGF0dXNcIjpcIiRzdGF0dXNcIixcImNsb2NrX3NvdXJjZVwiOlwiJGNsb2NrX3NvdXJjZVwiLFwiY2xvY2tfZG9tYWluXCI6XCIkY2xvY2tfZG9tYWluXCIsXCJzdGFydFwiOiRzdGFydCxcImVuZFwiOiQobm93KSxcInJlYWRzXCI6eyR7cmQlLH19LFwid3JpdGVzXCI6eyR7d3IlLH19LFwicmVhZF9vcmlnaW5zXCI6eyR7b3JpZ2lucyUsfX0sXCJjb2xsZWN0aW9uX2Vycm9yc1wiOlske2NvbGxlY3Rpb25fZXJyb3JzJSx9XSxcInByb2R1Y2VyX2luc3RhbmNlX2lkXCI6XCIkcHJvZHVjZXJfaW5zdGFuY2VcIixcInByb2R1Y2VyX3J1bl9pZFwiOlwiJHByb2R1Y2VyX3J1blwiLFwiZXh0ZXJuYWxfcmVxdWVzdFwiOiRyZXF1ZXN0X2pzb24sXCJkaWdlc3RcIjpcIiRkaWdlc3RcIn0iClsgIiRzdGF0dXMiID0gc3VjY2VzcyBdCg==
+      run: mkdir -p /tmp/j2g && printf "%s" "$J2G_OP_B64" | base64 -d > /tmp/j2g/j2g_op
+        && chmod +x /tmp/j2g/j2g_op && echo /tmp/j2g >> "$GITHUB_PATH"
+    - name: Git Pull
+      run: j2g_op git_pull
+    - name: Build
+      run: j2g_op build
+    - name: ecr-upload
+      run: j2g_op ecr_upload
+    - name: Deploy
+      env:
+        SSH_USERNAME: ${{ secrets.SSH_NFTTOWN_PROD_USERNAME }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_NFTTOWN_PROD_PRIVATE_KEY }}
+      run: "set -euo pipefail\n\nSSH_IDENTITY=\"$RUNNER_TEMP/ssh-nfttown-prod\"\n\
+        printf '%s\\n' \"$SSH_PRIVATE_KEY\" > \"$SSH_IDENTITY\"\nchmod 600 \"$SSH_IDENTITY\"\
+        \n\nssh_cmd() {\n  local host=\"$1\"\n  local command=\"$2\"\n  ssh -i \"\
+        $SSH_IDENTITY\" \\\n    -o StrictHostKeyChecking=no \\\n    -o UserKnownHostsFile=/dev/null\
+        \ \\\n    -o BatchMode=yes \\\n    -o IdentitiesOnly=yes \\\n    \"$SSH_USERNAME@$host\"\
+        \ \"$command\"\n}\n\nautoScalingGroupName='enta_front_asg'\ninstanceIds=$(aws\
+        \ autoscaling describe-auto-scaling-groups \\\n  --region \"$AWS_DEFAULT_REGION\"\
+        \ \\\n  --auto-scaling-group-names \"$autoScalingGroupName\" \\\n  --query\
+        \ 'AutoScalingGroups[0].Instances[*].InstanceId' \\\n  --output text)\n\n\
+        IFS=$'\\t' read -r -a instanceIdArray <<< \"$instanceIds\"\nif [ ${#instanceIdArray[@]}\
+        \ -eq 0 ]; then\n  instanceIdArray=(\"\")\nfi\n\nASG_SERVER=()\nfor instanceId\
+        \ in \"${instanceIdArray[@]}\"; do\n  echo \"start\"\n  privateIpAddress=$(aws\
+        \ ec2 describe-instances \\\n    --region \"$AWS_DEFAULT_REGION\" \\\n   \
+        \ --instance-ids \"$instanceId\" \\\n    --query 'Reservations[0].Instances[0].PrivateIpAddress'\
+        \ \\\n    --output text)\n  echo \"Instance ID: $instanceId, Private IP Address:\
+        \ $privateIpAddress\"\n  ASG_SERVER+=(\"$privateIpAddress\")\ndone\n\nfor\
+        \ host in \"${ASG_SERVER[@]}\"; do\n  # Deploy - Docker pull Build\n  ssh_cmd\
+        \ \"$host\" \"aws ecr get-login-password --region ap-northeast-2 | docker\
+        \ login --username AWS --password-stdin 237849436738.dkr.ecr.ap-northeast-2.amazonaws.com\"\
+        \n  ssh_cmd \"$host\" \"docker pull 237849436738.dkr.ecr.ap-northeast-2.amazonaws.com/$AWS_ECR_REPOSITORY:latest\"\
+        \n\n  # Deploy - Container Run\n  checkContainerCommand='docker ps -a --format\
+        \ \"{{.Names}}\" | grep -w nfttown-portal-web-con || true'\n  containerExists=false\n\
+        \n  if checkResult=$(ssh_cmd \"$host\" \"$checkContainerCommand\"); then\n\
+        \    if [ \"$(echo \"$checkResult\" | tr -d '\\r' | xargs)\" = \"nfttown-portal-web-con\"\
+        \ ]; then\n      containerExists=true\n    fi\n  else\n    echo \"Error occurred\
+        \ while checking the container: $?\"\n  fi\n\n  if [ \"$containerExists\"\
+        \ = true ]; then\n    if ssh_cmd \"$host\" 'docker rm -f nfttown-portal-web-con';\
+        \ then\n      checkContainerBackup='docker ps -a --format \"{{.Names}}\" |\
+        \ grep -w nfttown-portal-web-con-backup || true'\n      if backupResult=$(ssh_cmd\
+        \ \"$host\" \"$checkContainerBackup\"); then\n        if echo \"$backupResult\"\
+        \ | grep -q \"nfttown-portal-web-con-backup\"; then\n          ssh_cmd \"\
+        $host\" 'docker rm nfttown-portal-web-con-backup' || echo \"Error occurred\
+        \ while checking the container: $?\"\n        fi\n      else\n        echo\
+        \ \"Error occurred while checking the container: $?\"\n      fi\n      ssh_cmd\
+        \ \"$host\" 'docker rename nfttown-portal-web-con nfttown-portal-web-con-backup'\
+        \ || echo \"Error occurred while removing the container: $?\"\n    else\n\
+        \      echo \"Error occurred while removing the container: $?\"\n    fi\n\
+        \  else\n    echo \"Container 'nfttown-portal-web-con' does not exist.\"\n\
+        \  fi\n\n  ssh_cmd \"$host\" \"docker run -d --name nfttown-portal-web-con\
+        \ -p 80:3000 237849436738.dkr.ecr.ap-northeast-2.amazonaws.com/$AWS_ECR_REPOSITORY:latest\"\
+        \n\n  sleep 30\n\n  # Health Check\n  ssh_cmd \"$host\" 'docker system prune\
+        \ -a --force'\n  for i in {0..9}; do\n    response=$(ssh_cmd \"$host\" 'curl\
+        \ -s -o /dev/null -w \"%{http_code}\" localhost')\n    if [ \"$response\"\
+        \ != \"200\" ]; then\n      ssh_cmd \"$host\" 'docker run -d --name nfttown-portal-web-con-backup\
+        \ -p 80:3000'\n      ssh_cmd \"$host\" 'docker rm nfttown-portal-web-con'\n\
+        \      ssh_cmd \"$host\" 'docker rename nfttown-portal-web-con-backup nfttown-portal-web-con'\n\
+        \      echo 'backup deploy' >&2\n      exit 1\n    fi\n  done\n\n  checkContainerBackup='docker\
+        \ ps -a --format \"{{.Names}}\" | grep -w nfttown-portal-web-con-backup ||\
+        \ true'\n  if backupResult=$(ssh_cmd \"$host\" \"$checkContainerBackup\");\
+        \ then\n    if echo \"$backupResult\" | grep -q \"nfttown-portal-web-con-backup\"\
+        ; then\n      ssh_cmd \"$host\" 'docker rm nfttown-portal-web-con-backup'\
+        \ || echo \"Error occurred while checking the container: $?\"\n    fi\n  else\n\
+        \    echo \"Error occurred while checking the container: $?\"\n  fi\ndone\n"
+'on':
+  workflow_dispatch: {}
