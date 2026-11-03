@@ -1,0 +1,131 @@
+name: CI/CD Pipeline
+env:
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_CREDENTIALS: ${{ secrets.DOCKER_CREDENTIALS }}
+  IMAGE_PREFIX: j2g-redacted
+  SONARQUBE_URL: ${{ secrets.SONARQUBE_URL }}
+  SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+  K8S_NAMESPACE_STG: j2g-redacted
+  K8S_NAMESPACE_PROD: j2g-redacted
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  BUILD_TAG: j2g-redacted
+  BACKEND_IMAGE: j2g-redacted
+  FRONTEND_IMAGE: j2g-redacted
+  GIT_COMMIT: ${{ github.sha }}
+  GIT_URL: ${{ github.server_url }}/${{ github.repository }}
+  J2G_RUN_ID: Shubham-kumar2507__ai-devsecops-app__76aebe24-d3post2-r0-build_feedback-i1-build0
+  J2G_FAULTS: ''
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: j2g-Shubham-kumar2507__ai-devsecops-app__76aebe24-d3post2-r0-build_feedback-i1-build0-${{
+        github.workflow }}-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+    - name: j2g-probe-install
+      env:
+        J2G_OP_B64: IyEvdXNyL2Jpbi9lbnYgYmFzaAojIEZyYW1ld29yayB0ZXN0IGRvdWJsZTogcmVjb3JkcyBvbmUgaW5zdHJ1bWVudGVkIG9wZXJhdGlvbiBldmVudC4Kc2V0IC1vIHBpcGVmYWlsCm9wPSIkMSI7IHNoaWZ0IHx8IHRydWUKcmVhZHM9IiI7IHdyaXRlcz0iIjsgcmVxdWVzdD0iIgp3aGlsZSBbICQjIC1ndCAwIF07IGRvCiAgY2FzZSAiJDEiIGluCiAgICAtLXJlYWRzKSByZWFkcz0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLXdyaXRlcykgd3JpdGVzPSIkMiI7IHNoaWZ0IDIgOzsKICAgIC0tcmVxdWVzdCkgcmVxdWVzdD0iJDIiOyBzaGlmdCAyIDs7CiAgICAqKSBzaGlmdCA7OwogIGVzYWMKZG9uZQpjbG9ja19zb3VyY2U9d2FsbDsgY2xvY2tfZG9tYWluPSIiCmlmIFsgLXIgL3Byb2MvdXB0aW1lIF0gJiYgY29tbWFuZCAtdiBhd2sgPi9kZXYvbnVsbCAmJiBjb21tYW5kIC12IGhvc3RuYW1lID4vZGV2L251bGw7IHRoZW4KICBjbG9ja19zb3VyY2U9bW9ub3RvbmljCiAgaG9zdD0kKGhvc3RuYW1lKQogIGlmIFsgLW4gIiR7R0lUSFVCX0pPQjotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImdoYToke0dJVEhVQl9KT0J9OiRob3N0IjsgZmkKICBpZiBbIC1uICIke05PREVfTkFNRTotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImplbmtpbnM6JHtOT0RFX05BTUV9OiRob3N0IjsgZmkKZmkKbm93KCkgewogIGlmIFsgIiRjbG9ja19zb3VyY2UiID0gbW9ub3RvbmljIF07IHRoZW4gYXdrICd7cHJpbnQgJDF9JyAvcHJvYy91cHRpbWUKICBlbHNlIGRhdGUgKyVzLiVOOyBmaQp9CnN0YXJ0PSQobm93KTsgc3RhdHVzPXN1Y2Nlc3M7IHJkPSIiOyB3cj0iIjsgb3JpZ2lucz0iIjsgYWxsPSIiOyBjb2xsZWN0aW9uX2Vycm9ycz0iIgpbIC1uICIke0oyR19SVU5fSUQ6LX0iIF0gfHwgc3RhdHVzPWZhaWx1cmUKaW5zdGFuY2U9IiRvcC0ke0oyR19SVU5fSUQ6LXJ1bn0tJChkYXRlICslcyVOKS0kJC0kUkFORE9NIgpwcm9kdWNlcl9pbnN0YW5jZT0iIjsgcHJvZHVjZXJfcnVuPSIiCklGUz0sIHJlYWQgLXJhIFIgPDw8ICIkcmVhZHMiCmZvciBwIGluICIke1JbQF19IjsgZG8KICBbIC16ICIkcCIgXSAmJiBjb250aW51ZQogIGlmIFsgLWYgIiRwIiBdOyB0aGVuCiAgICBpZiBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICByZD0iJHJkXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBjb2xsZWN0aW9uX2Vycm9ycz0iJGNvbGxlY3Rpb25fZXJyb3JzXCIkcFwiLCIKICAgIGZpCiAgICBJRlM9JCdcdCcgcmVhZCAtciBtYXJrZXIgb3JpZ2luX3J1biBvcmlnaW5fb3Agb3JpZ2luX2luc3RhbmNlIDwgIiRwIiB8fCB0cnVlCiAgICBpZiBbICIkbWFya2VyIiA9IEoyR19PUklHSU4gXSAmJiBbIC1uICIkb3JpZ2luX2luc3RhbmNlIiBdOyB0aGVuCiAgICAgIG9yaWdpbnM9IiRvcmlnaW5zXCIkcFwiOntcInJ1bl9pZFwiOlwiJG9yaWdpbl9ydW5cIixcIm9wZXJhdGlvbl9pZFwiOlwiJG9yaWdpbl9vcFwiLFwib3BlcmF0aW9uX2luc3RhbmNlX2lkXCI6XCIkb3JpZ2luX2luc3RhbmNlXCJ9LCIKICAgICAgcHJvZHVjZXJfaW5zdGFuY2U9IiRvcmlnaW5faW5zdGFuY2UiOyBwcm9kdWNlcl9ydW49IiRvcmlnaW5fcnVuIgogICAgICBbICIkb3JpZ2luX3J1biIgPSAiJHtKMkdfUlVOX0lEOi19IiBdIHx8IHN0YXR1cz1mYWlsdXJlCiAgICBmaQogIGVsc2UgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBmaQpkb25lCmNhc2UgIiwke0oyR19GQVVMVFM6LX0sIiBpbiAqIiwkb3AsIiopIHN0YXR1cz1mYWlsdXJlIDs7IGVzYWMKaWYgWyAiJHN0YXR1cyIgPSBzdWNjZXNzIF07IHRoZW4KICBJRlM9LCByZWFkIC1yYSBXciA8PDwgIiR3cml0ZXMiCiAgZm9yIHAgaW4gIiR7V3JbQF19IjsgZG8KICAgIFsgLXogIiRwIiBdICYmIGNvbnRpbnVlCiAgICBpZiBta2RpciAtcCAiJChkaXJuYW1lICIkcCIpIiAmJgogICAgICAgcHJpbnRmICdKMkdfT1JJR0lOXHQlc1x0JXNcdCVzXG4nICIkSjJHX1JVTl9JRCIgIiRvcCIgIiRpbnN0YW5jZSIgPiAiJHAiICYmCiAgICAgICBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICB3cj0iJHdyXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgc3RhdHVzPWZhaWx1cmU7IGNvbGxlY3Rpb25fZXJyb3JzPSIkY29sbGVjdGlvbl9lcnJvcnNcIiRwXCIsIgogICAgZmkKICBkb25lCmZpCnJlcXVlc3RfanNvbj1udWxsCmlmIFsgLW4gIiRyZXF1ZXN0IiBdICYmIFsgIiRzdGF0dXMiID0gc3VjY2VzcyBdOyB0aGVuCiAgcmVxdWVzdF9qc29uPSJ7XCJraW5kXCI6XCIke3JlcXVlc3QlJToqfVwiLFwidGFyZ2V0XCI6XCIke3JlcXVlc3QjKjp9XCJ9IgpmaQpkaWdlc3Q9JChwcmludGYgJyVzJyAiJGFsbCIgfCBzaGEyNTZzdW0gfCBjdXQgLWMxLTE2KQplY2hvICJKMkdfUFJPQkUge1wib3BlcmF0aW9uX2lkXCI6XCIkb3BcIixcIm9wZXJhdGlvbl9pbnN0YW5jZV9pZFwiOlwiJGluc3RhbmNlXCIsXCJydW5faWRcIjpcIiR7SjJHX1JVTl9JRDotfVwiLFwic2NlbmFyaW9faWRcIjpcIiR7SjJHX1NDRU5BUklPX0lEOi19XCIsXCJzdGF0dXNcIjpcIiRzdGF0dXNcIixcImNsb2NrX3NvdXJjZVwiOlwiJGNsb2NrX3NvdXJjZVwiLFwiY2xvY2tfZG9tYWluXCI6XCIkY2xvY2tfZG9tYWluXCIsXCJzdGFydFwiOiRzdGFydCxcImVuZFwiOiQobm93KSxcInJlYWRzXCI6eyR7cmQlLH19LFwid3JpdGVzXCI6eyR7d3IlLH19LFwicmVhZF9vcmlnaW5zXCI6eyR7b3JpZ2lucyUsfX0sXCJjb2xsZWN0aW9uX2Vycm9yc1wiOlske2NvbGxlY3Rpb25fZXJyb3JzJSx9XSxcInByb2R1Y2VyX2luc3RhbmNlX2lkXCI6XCIkcHJvZHVjZXJfaW5zdGFuY2VcIixcInByb2R1Y2VyX3J1bl9pZFwiOlwiJHByb2R1Y2VyX3J1blwiLFwiZXh0ZXJuYWxfcmVxdWVzdFwiOiRyZXF1ZXN0X2pzb24sXCJkaWdlc3RcIjpcIiRkaWdlc3RcIn0iClsgIiRzdGF0dXMiID0gc3VjY2VzcyBdCg==
+      run: mkdir -p /tmp/j2g && printf "%s" "$J2G_OP_B64" | base64 -d > /tmp/j2g/j2g_op
+        && chmod +x /tmp/j2g/j2g_op && echo /tmp/j2g >> "$GITHUB_PATH"
+    - name: Configure kubeconfig
+      run: 'echo "${{ secrets.KUBECONFIG }}" > ${{ runner.temp }}/kubeconfig
+
+        echo "KUBECONFIG=${{ runner.temp }}/kubeconfig" >> $GITHUB_ENV
+
+        '
+    - name: Checkout
+      run: j2g_op checkout
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - name: Install Dependencies
+      run: "(cd backend && npm ci --prefer-offline) &\npid1=$!\n(cd frontend && npm\
+        \ ci --prefer-offline) &\npid2=$!\nwait $pid1; status1=$?\nwait $pid2; status2=$?\n\
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then\n  exit 1\nfi\n"
+    - name: Lint
+      run: "(cd backend && npm run lint --if-present || echo \"No lint script configured\"\
+        ) &\npid1=$!\n(cd frontend && npm run lint --if-present || echo \"No lint\
+        \ script configured\") &\npid2=$!\nwait $pid1; status1=$?\nwait $pid2; status2=$?\n\
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then\n  exit 1\nfi\n"
+    - name: Unit Tests
+      id: tests
+      run: "(cd backend && npm test -- --ci --reporters=default --reporters=jest-junit\
+        \ --coverage --coverageReporters=text --coverageReporters=cobertura --passWithNoTests)\
+        \ &\npid1=$!\n(cd frontend && npm test -- --ci --reporters=default --reporters=jest-junit\
+        \ --passWithNoTests) &\npid2=$!\nwait $pid1; status1=$?\nwait $pid2; status2=$?\n\
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then\n  exit 1\nfi\n"
+    - name: Upload Backend Test Results
+      if: always() && steps.tests.outcome != 'skipped'
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-test-results
+        path: 'backend/junit.xml
+
+          backend/coverage/cobertura-coverage.xml
+
+          '
+        if-no-files-found: ignore
+    - name: Upload Frontend Test Results
+      if: always() && steps.tests.outcome != 'skipped'
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-test-results
+        path: frontend/junit.xml
+        if-no-files-found: ignore
+    - name: "SAST \u2014 SonarQube"
+      id: sast
+      run: j2g_op sast_sonarqube
+    - name: "SAST \u2014 SonarQube post"
+      if: always() && steps.sast.outcome != 'skipped'
+      run: j2g_op sast_sonarqube_post_always
+    - name: Docker Build
+      run: "(docker build --target production --tag ${BACKEND_IMAGE}:${BUILD_TAG}\
+        \ --tag ${BACKEND_IMAGE}:latest --label \"org.opencontainers.image.revision=${GIT_COMMIT}\"\
+        \ --label \"org.opencontainers.image.source=${GIT_URL}\" --no-cache ./backend)\
+        \ &\npid1=$!\n(docker build --target production --tag ${FRONTEND_IMAGE}:${BUILD_TAG}\
+        \ --tag ${FRONTEND_IMAGE}:latest --label \"org.opencontainers.image.revision=${GIT_COMMIT}\"\
+        \ --label \"org.opencontainers.image.source=${GIT_URL}\" --no-cache ./frontend)\
+        \ &\npid2=$!\nwait $pid1; status1=$?\nwait $pid2; status2=$?\nif [ $status1\
+        \ -ne 0 ] || [ $status2 -ne 0 ]; then\n  exit 1\nfi\n"
+    - name: "Container Scan \u2014 Trivy"
+      run: "(docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest\
+        \ image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 --format table\
+        \ ${BACKEND_IMAGE}:${BUILD_TAG}) &\npid1=$!\n(docker run --rm -v /var/run/docker.sock:/var/run/docker.sock\
+        \ aquasec/trivy:latest image --severity HIGH,CRITICAL --ignore-unfixed --exit-code\
+        \ 1 --format table ${FRONTEND_IMAGE}:${BUILD_TAG}) &\npid2=$!\n(docker run\
+        \ --rm -v \"$PWD:/workspace\" -w /workspace aquasec/trivy:latest fs --scanners\
+        \ secret --severity HIGH,CRITICAL --exit-code 1 .) &\npid3=$!\nwait $pid1;\
+        \ status1=$?\nwait $pid2; status2=$?\nwait $pid3; status3=$?\nif [ $status1\
+        \ -ne 0 ] || [ $status2 -ne 0 ] || [ $status3 -ne 0 ]; then\n  exit 1\nfi\n"
+    - name: Push to Registry
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+      run: j2g_op push_to_registry
+    - name: Deploy to Staging
+      if: github.ref == 'refs/heads/main'
+      run: j2g_op deploy_to_staging
+    - name: "DAST \u2014 OWASP ZAP"
+      id: dast
+      if: github.ref == 'refs/heads/main'
+      run: j2g_op dast_owasp_zap
+    - name: "DAST \u2014 OWASP ZAP post"
+      if: always() && steps.dast.outcome != 'skipped'
+      run: j2g_op dast_owasp_zap_post_always --writes /zap/reports/**
+    - name: Deploy to Production
+      if: github.ref == 'refs/heads/main'
+      run: j2g_op deploy_to_production
+    - name: Post success
+      if: success()
+      run: j2g_op post_success
+    - name: Post failure
+      if: failure()
+      run: j2g_op post_failure
+    - name: Post always
+      if: always()
+      run: j2g_op post_always
+'on':
+  push: null
+  schedule:
+  - cron: '*/5 * * * *'
