@@ -1,0 +1,240 @@
+name: j2g-redacted
+concurrency:
+  group: j2g-sayaksatpathi__Jenkins-DevSecOps-Pipeline__c29bffce-d3-replay-v6-sayaksatpathi__Jenkins-D-0-h1-${{
+    github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      APP_NAME: j2g-redacted
+      AWS_REGION: j2g-redacted
+      ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      FORCE_DEPLOY: ${{ github.event.inputs.FORCE_DEPLOY || 'false' }}
+      SKIP_TRIVY_BLOCKING: ${{ github.event.inputs.SKIP_TRIVY_BLOCKING || 'false'
+        }}
+    steps:
+    - name: j2g-probe-install
+      env:
+        J2G_OP_B64: IyEvdXNyL2Jpbi9lbnYgYmFzaAojIEZyYW1ld29yayB0ZXN0IGRvdWJsZTogcmVjb3JkcyBvbmUgaW5zdHJ1bWVudGVkIG9wZXJhdGlvbiBldmVudC4Kc2V0IC1vIHBpcGVmYWlsCm9wPSIkMSI7IHNoaWZ0IHx8IHRydWUKcmVhZHM9IiI7IHdyaXRlcz0iIjsgcmVxdWVzdD0iIgp3aGlsZSBbICQjIC1ndCAwIF07IGRvCiAgY2FzZSAiJDEiIGluCiAgICAtLXJlYWRzKSByZWFkcz0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLXdyaXRlcykgd3JpdGVzPSIkMiI7IHNoaWZ0IDIgOzsKICAgIC0tcmVxdWVzdCkgcmVxdWVzdD0iJDIiOyBzaGlmdCAyIDs7CiAgICAqKSBzaGlmdCA7OwogIGVzYWMKZG9uZQpjbG9ja19zb3VyY2U9d2FsbDsgY2xvY2tfZG9tYWluPSIiCmlmIFsgLXIgL3Byb2MvdXB0aW1lIF0gJiYgY29tbWFuZCAtdiBhd2sgPi9kZXYvbnVsbCAmJiBjb21tYW5kIC12IGhvc3RuYW1lID4vZGV2L251bGw7IHRoZW4KICBjbG9ja19zb3VyY2U9bW9ub3RvbmljCiAgaG9zdD0kKGhvc3RuYW1lKQogIGlmIFsgLW4gIiR7R0lUSFVCX0pPQjotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImdoYToke0dJVEhVQl9KT0J9OiRob3N0IjsgZmkKICBpZiBbIC1uICIke05PREVfTkFNRTotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImplbmtpbnM6JHtOT0RFX05BTUV9OiRob3N0IjsgZmkKZmkKbm93KCkgewogIGlmIFsgIiRjbG9ja19zb3VyY2UiID0gbW9ub3RvbmljIF07IHRoZW4gYXdrICd7cHJpbnQgJDF9JyAvcHJvYy91cHRpbWUKICBlbHNlIGRhdGUgKyVzLiVOOyBmaQp9CnN0YXJ0PSQobm93KTsgc3RhdHVzPXN1Y2Nlc3M7IHJkPSIiOyB3cj0iIjsgb3JpZ2lucz0iIjsgYWxsPSIiOyBjb2xsZWN0aW9uX2Vycm9ycz0iIgpbIC1uICIke0oyR19SVU5fSUQ6LX0iIF0gfHwgc3RhdHVzPWZhaWx1cmUKaW5zdGFuY2U9IiRvcC0ke0oyR19SVU5fSUQ6LXJ1bn0tJChkYXRlICslcyVOKS0kJC0kUkFORE9NIgpwcm9kdWNlcl9pbnN0YW5jZT0iIjsgcHJvZHVjZXJfcnVuPSIiCklGUz0sIHJlYWQgLXJhIFIgPDw8ICIkcmVhZHMiCmZvciBwIGluICIke1JbQF19IjsgZG8KICBbIC16ICIkcCIgXSAmJiBjb250aW51ZQogIGlmIFsgLWYgIiRwIiBdOyB0aGVuCiAgICBpZiBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICByZD0iJHJkXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBjb2xsZWN0aW9uX2Vycm9ycz0iJGNvbGxlY3Rpb25fZXJyb3JzXCIkcFwiLCIKICAgIGZpCiAgICBJRlM9JCdcdCcgcmVhZCAtciBtYXJrZXIgb3JpZ2luX3J1biBvcmlnaW5fb3Agb3JpZ2luX2luc3RhbmNlIDwgIiRwIiB8fCB0cnVlCiAgICBpZiBbICIkbWFya2VyIiA9IEoyR19PUklHSU4gXSAmJiBbIC1uICIkb3JpZ2luX2luc3RhbmNlIiBdOyB0aGVuCiAgICAgIG9yaWdpbnM9IiRvcmlnaW5zXCIkcFwiOntcInJ1bl9pZFwiOlwiJG9yaWdpbl9ydW5cIixcIm9wZXJhdGlvbl9pZFwiOlwiJG9yaWdpbl9vcFwiLFwib3BlcmF0aW9uX2luc3RhbmNlX2lkXCI6XCIkb3JpZ2luX2luc3RhbmNlXCJ9LCIKICAgICAgcHJvZHVjZXJfaW5zdGFuY2U9IiRvcmlnaW5faW5zdGFuY2UiOyBwcm9kdWNlcl9ydW49IiRvcmlnaW5fcnVuIgogICAgICBbICIkb3JpZ2luX3J1biIgPSAiJHtKMkdfUlVOX0lEOi19IiBdIHx8IHN0YXR1cz1mYWlsdXJlCiAgICBmaQogIGVsc2UgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBmaQpkb25lCmNhc2UgIiwke0oyR19GQVVMVFM6LX0sIiBpbiAqIiwkb3AsIiopIHN0YXR1cz1mYWlsdXJlIDs7IGVzYWMKaWYgWyAiJHN0YXR1cyIgPSBzdWNjZXNzIF07IHRoZW4KICBJRlM9LCByZWFkIC1yYSBXciA8PDwgIiR3cml0ZXMiCiAgZm9yIHAgaW4gIiR7V3JbQF19IjsgZG8KICAgIFsgLXogIiRwIiBdICYmIGNvbnRpbnVlCiAgICBpZiBta2RpciAtcCAiJChkaXJuYW1lICIkcCIpIiAmJgogICAgICAgcHJpbnRmICdKMkdfT1JJR0lOXHQlc1x0JXNcdCVzXG4nICIkSjJHX1JVTl9JRCIgIiRvcCIgIiRpbnN0YW5jZSIgPiAiJHAiICYmCiAgICAgICBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICB3cj0iJHdyXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgc3RhdHVzPWZhaWx1cmU7IGNvbGxlY3Rpb25fZXJyb3JzPSIkY29sbGVjdGlvbl9lcnJvcnNcIiRwXCIsIgogICAgZmkKICBkb25lCmZpCnJlcXVlc3RfanNvbj1udWxsCmlmIFsgLW4gIiRyZXF1ZXN0IiBdICYmIFsgIiRzdGF0dXMiID0gc3VjY2VzcyBdOyB0aGVuCiAgcmVxdWVzdF9qc29uPSJ7XCJraW5kXCI6XCIke3JlcXVlc3QlJToqfVwiLFwidGFyZ2V0XCI6XCIke3JlcXVlc3QjKjp9XCJ9IgpmaQpkaWdlc3Q9JChwcmludGYgJyVzJyAiJGFsbCIgfCBzaGEyNTZzdW0gfCBjdXQgLWMxLTE2KQplY2hvICJKMkdfUFJPQkUge1wib3BlcmF0aW9uX2lkXCI6XCIkb3BcIixcIm9wZXJhdGlvbl9pbnN0YW5jZV9pZFwiOlwiJGluc3RhbmNlXCIsXCJydW5faWRcIjpcIiR7SjJHX1JVTl9JRDotfVwiLFwic2NlbmFyaW9faWRcIjpcIiR7SjJHX1NDRU5BUklPX0lEOi19XCIsXCJzdGF0dXNcIjpcIiRzdGF0dXNcIixcImNsb2NrX3NvdXJjZVwiOlwiJGNsb2NrX3NvdXJjZVwiLFwiY2xvY2tfZG9tYWluXCI6XCIkY2xvY2tfZG9tYWluXCIsXCJzdGFydFwiOiRzdGFydCxcImVuZFwiOiQobm93KSxcInJlYWRzXCI6eyR7cmQlLH19LFwid3JpdGVzXCI6eyR7d3IlLH19LFwicmVhZF9vcmlnaW5zXCI6eyR7b3JpZ2lucyUsfX0sXCJjb2xsZWN0aW9uX2Vycm9yc1wiOlske2NvbGxlY3Rpb25fZXJyb3JzJSx9XSxcInByb2R1Y2VyX2luc3RhbmNlX2lkXCI6XCIkcHJvZHVjZXJfaW5zdGFuY2VcIixcInByb2R1Y2VyX3J1bl9pZFwiOlwiJHByb2R1Y2VyX3J1blwiLFwiZXh0ZXJuYWxfcmVxdWVzdFwiOiRyZXF1ZXN0X2pzb24sXCJkaWdlc3RcIjpcIiRkaWdlc3RcIn0iClsgIiRzdGF0dXMiID0gc3VjY2VzcyBdCg==
+      run: mkdir -p /tmp/j2g && printf "%s" "$J2G_OP_B64" | base64 -d > /tmp/j2g/j2g_op
+        && chmod +x /tmp/j2g/j2g_op && echo /tmp/j2g >> "$GITHUB_PATH"
+    - name: Checkout
+      id: checkout
+      continue-on-error: true
+      run: j2g_op checkout
+    - name: Mark pipeline failed (Checkout)
+      if: always() && steps.checkout.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Unit Test
+      id: unit_test
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op unit_test
+    - name: Mark pipeline failed (Unit Test)
+      if: always() && steps.unit_test.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Unit Test post always
+      if: always() && steps.unit_test.outcome != 'skipped'
+      run: j2g_op unit_test_post_always
+    - name: Unit Test post failure
+      if: always() && steps.unit_test.outcome != 'skipped' && (steps.unit_test.outcome
+        == 'failure' || failure())
+      run: j2g_op unit_test_post_failure
+    - name: Unit Test post success
+      if: always() && steps.unit_test.outcome == 'success' && success()
+      run: j2g_op unit_test_post_success
+    - name: Lint
+      id: lint
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op lint
+    - name: Mark pipeline failed (Lint)
+      if: always() && steps.lint.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Lint post failure
+      if: always() && steps.lint.outcome != 'skipped' && (steps.lint.outcome == 'failure'
+        || failure())
+      run: j2g_op lint_post_failure
+    - name: SAST
+      id: sast
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op sast
+    - name: Mark pipeline failed (SAST)
+      if: always() && steps.sast.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: SAST post always
+      if: always() && steps.sast.outcome != 'skipped'
+      run: j2g_op sast_post_always --writes reports/semgrep-results.sarif
+    - name: SAST post failure
+      if: always() && steps.sast.outcome != 'skipped' && (steps.sast.outcome == 'failure'
+        || failure())
+      run: j2g_op sast_post_failure
+    - name: Dependency Scan
+      id: dependency_scan
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op dependency_scan
+    - name: Mark pipeline failed (Dependency Scan)
+      if: always() && steps.dependency_scan.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Dependency Scan post always
+      if: always() && steps.dependency_scan.outcome != 'skipped'
+      run: j2g_op dependency_scan_post_always --writes reports/pip-audit-results.json
+    - name: Dependency Scan post failure
+      if: always() && steps.dependency_scan.outcome != 'skipped' && (steps.dependency_scan.outcome
+        == 'failure' || failure())
+      run: j2g_op dependency_scan_post_failure
+    - name: Docker Build
+      id: docker_build
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op docker_build
+    - name: Mark pipeline failed (Docker Build)
+      if: always() && steps.docker_build.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Docker Build post failure
+      if: always() && steps.docker_build.outcome != 'skipped' && (steps.docker_build.outcome
+        == 'failure' || failure())
+      run: j2g_op docker_build_post_failure
+    - name: Trivy Scan
+      id: trivy_scan
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op trivy_scan
+    - name: Mark pipeline failed (Trivy Scan)
+      if: always() && steps.trivy_scan.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Trivy Scan post always
+      if: always() && steps.trivy_scan.outcome != 'skipped'
+      run: j2g_op trivy_scan_post_always --writes reports/trivy-results.json,reports/trivy-table.txt
+    - name: Trivy Scan post failure
+      if: always() && steps.trivy_scan.outcome != 'skipped' && (steps.trivy_scan.outcome
+        == 'failure' || failure())
+      run: j2g_op trivy_scan_post_failure
+    - name: SBOM
+      id: sbom
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      run: j2g_op sbom
+    - name: Mark pipeline failed (SBOM)
+      if: always() && steps.sbom.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: SBOM post always
+      if: always() && steps.sbom.outcome != 'skipped'
+      run: j2g_op sbom_post_always --writes reports/sbom-*.json
+    - name: SBOM post failure
+      if: always() && steps.sbom.outcome != 'skipped' && (steps.sbom.outcome == 'failure'
+        || failure())
+      run: j2g_op sbom_post_failure
+    - name: Push to ECR
+      id: push_to_ecr
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: j2g_op push_to_ecr
+    - name: Mark pipeline failed (Push to ECR)
+      if: always() && steps.push_to_ecr.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Push to ECR post failure
+      if: always() && steps.push_to_ecr.outcome != 'skipped' && (steps.push_to_ecr.outcome
+        == 'failure' || failure())
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: j2g_op push_to_ecr_post_failure
+    - name: Sign Image
+      id: sign_image
+      if: success() && env.PIPELINE_FAILED != 'true'
+      continue-on-error: true
+      env:
+        COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+      run: j2g_op sign_image
+    - name: Mark pipeline failed (Sign Image)
+      if: always() && steps.sign_image.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Sign Image post failure
+      if: always() && steps.sign_image.outcome != 'skipped' && (steps.sign_image.outcome
+        == 'failure' || failure())
+      env:
+        COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+      run: j2g_op sign_image_post_failure
+    - name: Deploy
+      id: deploy
+      if: success() && env.PIPELINE_FAILED != 'true' && (github.ref == 'refs/heads/main'
+        || github.event.inputs.FORCE_DEPLOY == 'true')
+      continue-on-error: true
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: j2g_op deploy
+    - name: Mark pipeline failed (Deploy)
+      if: always() && steps.deploy.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Deploy post failure
+      if: always() && steps.deploy.outcome != 'skipped' && (steps.deploy.outcome ==
+        'failure' || failure())
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: j2g_op deploy_post_failure
+    - name: Verify
+      id: verify
+      if: success() && env.PIPELINE_FAILED != 'true' && (github.ref == 'refs/heads/main'
+        || github.event.inputs.FORCE_DEPLOY == 'true')
+      continue-on-error: true
+      run: j2g_op verify
+    - name: Mark pipeline failed (Verify)
+      if: always() && steps.verify.outcome == 'failure'
+      run: echo "PIPELINE_FAILED=true" >> "$GITHUB_ENV"
+    - name: Verify post failure
+      if: always() && steps.verify.outcome != 'skipped' && (steps.verify.outcome ==
+        'failure' || failure())
+      run: j2g_op verify_post_failure
+    - name: Verify post success
+      if: always() && steps.verify.outcome == 'success' && success()
+      run: j2g_op verify_post_success
+    - name: Fail pipeline if any stage failed
+      if: always() && env.PIPELINE_FAILED == 'true'
+      run: exit 1
+    - name: Post always
+      if: always()
+      run: j2g_op post_always --writes reports/**
+    - name: Post success
+      if: success() && env.PIPELINE_FAILED != 'true'
+      run: j2g_op post_success
+    - name: Post failure
+      if: always() && (failure() || env.PIPELINE_FAILED == 'true')
+      run: j2g_op post_failure
+    - name: Post unstable
+      if: ${{ false }}
+      run: j2g_op post_unstable
+    - name: Post cleanup
+      if: always()
+      run: j2g_op post_cleanup
+env:
+  J2G_RUN_ID: sayaksatpathi__Jenkins-DevSecOps-Pipeline__c29bffce-d3-replay-v6-sayaksatpathi__Jenkins-D-0-h1
+  J2G_SCENARIO_ID: sayaksatpathi__Jenkins-DevSecOps-Pipeline__c29bffce-d3-replay-v6-sayaksatpathi__Jenkins-D-0-h1
+  J2G_FAULTS: post_unstable
+'on':
+  push:
+    branches:
+    - '**'
+  workflow_dispatch:
+    inputs:
+      FORCE_DEPLOY:
+        description: Force deployment on non-main branches (for manual testing)
+        required: false
+        default: false
+        type: boolean
+      SKIP_TRIVY_BLOCKING:
+        description: "Treat Trivy CRITICAL findings as warnings (emergency override\
+          \ \u2014 use with caution)"
+        required: false
+        default: false
+        type: boolean
