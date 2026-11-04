@@ -1,0 +1,143 @@
+name: CI/CD Pipeline
+env:
+  DOCKER_REGISTRY: j2g-redacted
+  DOCKER_CREDENTIALS: j2g-redacted
+  IMAGE_PREFIX: j2g-redacted
+  SONARQUBE_URL: j2g-redacted
+  SONARQUBE_TOKEN: j2g-redacted
+  KUBECONFIG: j2g-redacted
+  K8S_NAMESPACE_STG: j2g-redacted
+  K8S_NAMESPACE_PROD: j2g-redacted
+  SLACK_WEBHOOK: j2g-redacted
+  BUILD_TAG: j2g-redacted
+  BACKEND_IMAGE: j2g-redacted
+  FRONTEND_IMAGE: j2g-redacted
+  J2G_RUN_ID: Shubham-kumar2507__ai-devsecops-app__76aebe24-d3v9-replay-Shubham-kumar2507__ai-de-1-h1
+  J2G_SCENARIO_ID: Shubham-kumar2507__ai-devsecops-app__76aebe24-d3v9-replay-Shubham-kumar2507__ai-de-1-h1
+  J2G_FAULTS: scan_frontend_image
+concurrency:
+  group: j2g-Shubham-kumar2507__ai-devsecops-app__76aebe24-d3v9-replay-Shubham-kumar2507__ai-de-1-h1-${{
+    github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+    - name: j2g-probe-install
+      env:
+        J2G_OP_B64: IyEvdXNyL2Jpbi9lbnYgYmFzaAojIEZyYW1ld29yayB0ZXN0IGRvdWJsZTogcmVjb3JkcyBvbmUgaW5zdHJ1bWVudGVkIG9wZXJhdGlvbiBldmVudC4Kc2V0IC1vIHBpcGVmYWlsCm9wPSIkMSI7IHNoaWZ0IHx8IHRydWUKcmVhZHM9IiI7IHdyaXRlcz0iIjsgcmVxdWVzdD0iIgp3aGlsZSBbICQjIC1ndCAwIF07IGRvCiAgY2FzZSAiJDEiIGluCiAgICAtLXJlYWRzKSByZWFkcz0iJDIiOyBzaGlmdCAyIDs7CiAgICAtLXdyaXRlcykgd3JpdGVzPSIkMiI7IHNoaWZ0IDIgOzsKICAgIC0tcmVxdWVzdCkgcmVxdWVzdD0iJDIiOyBzaGlmdCAyIDs7CiAgICAqKSBzaGlmdCA7OwogIGVzYWMKZG9uZQpjbG9ja19zb3VyY2U9d2FsbDsgY2xvY2tfZG9tYWluPSIiCmlmIFsgLXIgL3Byb2MvdXB0aW1lIF0gJiYgY29tbWFuZCAtdiBhd2sgPi9kZXYvbnVsbCAmJiBjb21tYW5kIC12IGhvc3RuYW1lID4vZGV2L251bGw7IHRoZW4KICBjbG9ja19zb3VyY2U9bW9ub3RvbmljCiAgaG9zdD0kKGhvc3RuYW1lKQogIGlmIFsgLW4gIiR7R0lUSFVCX0pPQjotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImdoYToke0dJVEhVQl9KT0J9OiRob3N0IjsgZmkKICBpZiBbIC1uICIke05PREVfTkFNRTotfSIgXTsgdGhlbiBjbG9ja19kb21haW49ImplbmtpbnM6JHtOT0RFX05BTUV9OiRob3N0IjsgZmkKZmkKbm93KCkgewogIGlmIFsgIiRjbG9ja19zb3VyY2UiID0gbW9ub3RvbmljIF07IHRoZW4gYXdrICd7cHJpbnQgJDF9JyAvcHJvYy91cHRpbWUKICBlbHNlIGRhdGUgKyVzLiVOOyBmaQp9CnN0YXJ0PSQobm93KTsgc3RhdHVzPXN1Y2Nlc3M7IHJkPSIiOyB3cj0iIjsgb3JpZ2lucz0iIjsgYWxsPSIiOyBjb2xsZWN0aW9uX2Vycm9ycz0iIgpbIC1uICIke0oyR19SVU5fSUQ6LX0iIF0gfHwgc3RhdHVzPWZhaWx1cmUKaW5zdGFuY2U9IiRvcC0ke0oyR19SVU5fSUQ6LXJ1bn0tJChkYXRlICslcyVOKS0kJC0kUkFORE9NIgpwcm9kdWNlcl9pbnN0YW5jZT0iIjsgcHJvZHVjZXJfcnVuPSIiCklGUz0sIHJlYWQgLXJhIFIgPDw8ICIkcmVhZHMiCmZvciBwIGluICIke1JbQF19IjsgZG8KICBbIC16ICIkcCIgXSAmJiBjb250aW51ZQogIGlmIFsgLWYgIiRwIiBdOyB0aGVuCiAgICBpZiBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICByZD0iJHJkXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBjb2xsZWN0aW9uX2Vycm9ycz0iJGNvbGxlY3Rpb25fZXJyb3JzXCIkcFwiLCIKICAgIGZpCiAgICBJRlM9JCdcdCcgcmVhZCAtciBtYXJrZXIgb3JpZ2luX3J1biBvcmlnaW5fb3Agb3JpZ2luX2luc3RhbmNlIDwgIiRwIiB8fCB0cnVlCiAgICBpZiBbICIkbWFya2VyIiA9IEoyR19PUklHSU4gXSAmJiBbIC1uICIkb3JpZ2luX2luc3RhbmNlIiBdOyB0aGVuCiAgICAgIG9yaWdpbnM9IiRvcmlnaW5zXCIkcFwiOntcInJ1bl9pZFwiOlwiJG9yaWdpbl9ydW5cIixcIm9wZXJhdGlvbl9pZFwiOlwiJG9yaWdpbl9vcFwiLFwib3BlcmF0aW9uX2luc3RhbmNlX2lkXCI6XCIkb3JpZ2luX2luc3RhbmNlXCJ9LCIKICAgICAgcHJvZHVjZXJfaW5zdGFuY2U9IiRvcmlnaW5faW5zdGFuY2UiOyBwcm9kdWNlcl9ydW49IiRvcmlnaW5fcnVuIgogICAgICBbICIkb3JpZ2luX3J1biIgPSAiJHtKMkdfUlVOX0lEOi19IiBdIHx8IHN0YXR1cz1mYWlsdXJlCiAgICBmaQogIGVsc2UgcmQ9IiRyZFwiJHBcIjpudWxsLCI7IHN0YXR1cz1mYWlsdXJlOyBmaQpkb25lCmNhc2UgIiwke0oyR19GQVVMVFM6LX0sIiBpbiAqIiwkb3AsIiopIHN0YXR1cz1mYWlsdXJlIDs7IGVzYWMKaWYgWyAiJHN0YXR1cyIgPSBzdWNjZXNzIF07IHRoZW4KICBJRlM9LCByZWFkIC1yYSBXciA8PDwgIiR3cml0ZXMiCiAgZm9yIHAgaW4gIiR7V3JbQF19IjsgZG8KICAgIFsgLXogIiRwIiBdICYmIGNvbnRpbnVlCiAgICBpZiBta2RpciAtcCAiJChkaXJuYW1lICIkcCIpIiAmJgogICAgICAgcHJpbnRmICdKMkdfT1JJR0lOXHQlc1x0JXNcdCVzXG4nICIkSjJHX1JVTl9JRCIgIiRvcCIgIiRpbnN0YW5jZSIgPiAiJHAiICYmCiAgICAgICBkPSQoc2hhMjU2c3VtICIkcCIgfCBjdXQgLWMxLTE2KTsgdGhlbgogICAgICB3cj0iJHdyXCIkcFwiOlwiJGRcIiwiOyBhbGw9IiRhbGwkZCIKICAgIGVsc2UKICAgICAgc3RhdHVzPWZhaWx1cmU7IGNvbGxlY3Rpb25fZXJyb3JzPSIkY29sbGVjdGlvbl9lcnJvcnNcIiRwXCIsIgogICAgZmkKICBkb25lCmZpCnJlcXVlc3RfanNvbj1udWxsCmlmIFsgLW4gIiRyZXF1ZXN0IiBdICYmIFsgIiRzdGF0dXMiID0gc3VjY2VzcyBdOyB0aGVuCiAgcmVxdWVzdF9qc29uPSJ7XCJraW5kXCI6XCIke3JlcXVlc3QlJToqfVwiLFwidGFyZ2V0XCI6XCIke3JlcXVlc3QjKjp9XCJ9IgpmaQpkaWdlc3Q9JChwcmludGYgJyVzJyAiJGFsbCIgfCBzaGEyNTZzdW0gfCBjdXQgLWMxLTE2KQplY2hvICJKMkdfUFJPQkUge1wib3BlcmF0aW9uX2lkXCI6XCIkb3BcIixcIm9wZXJhdGlvbl9pbnN0YW5jZV9pZFwiOlwiJGluc3RhbmNlXCIsXCJydW5faWRcIjpcIiR7SjJHX1JVTl9JRDotfVwiLFwic2NlbmFyaW9faWRcIjpcIiR7SjJHX1NDRU5BUklPX0lEOi19XCIsXCJzdGF0dXNcIjpcIiRzdGF0dXNcIixcImNsb2NrX3NvdXJjZVwiOlwiJGNsb2NrX3NvdXJjZVwiLFwiY2xvY2tfZG9tYWluXCI6XCIkY2xvY2tfZG9tYWluXCIsXCJzdGFydFwiOiRzdGFydCxcImVuZFwiOiQobm93KSxcInJlYWRzXCI6eyR7cmQlLH19LFwid3JpdGVzXCI6eyR7d3IlLH19LFwicmVhZF9vcmlnaW5zXCI6eyR7b3JpZ2lucyUsfX0sXCJjb2xsZWN0aW9uX2Vycm9yc1wiOlske2NvbGxlY3Rpb25fZXJyb3JzJSx9XSxcInByb2R1Y2VyX2luc3RhbmNlX2lkXCI6XCIkcHJvZHVjZXJfaW5zdGFuY2VcIixcInByb2R1Y2VyX3J1bl9pZFwiOlwiJHByb2R1Y2VyX3J1blwiLFwiZXh0ZXJuYWxfcmVxdWVzdFwiOiRyZXF1ZXN0X2pzb24sXCJkaWdlc3RcIjpcIiRkaWdlc3RcIn0iClsgIiRzdGF0dXMiID0gc3VjY2VzcyBdCg==
+      run: mkdir -p /tmp/j2g && printf "%s" "$J2G_OP_B64" | base64 -d > /tmp/j2g/j2g_op
+        && chmod +x /tmp/j2g/j2g_op && echo /tmp/j2g >> "$GITHUB_PATH"
+    - name: Checkout
+      run: j2g_op checkout
+    - name: Install Dependencies
+      run: 'set +e
+
+        j2g_op backend_deps & pid1=$!
+
+        j2g_op frontend_deps & pid2=$!
+
+        wait $pid1; status1=$?
+
+        wait $pid2; status2=$?
+
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then exit 1; fi
+
+        '
+    - name: Lint
+      run: 'set +e
+
+        j2g_op lint_backend & pid1=$!
+
+        j2g_op lint_frontend & pid2=$!
+
+        wait $pid1; status1=$?
+
+        wait $pid2; status2=$?
+
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then exit 1; fi
+
+        '
+    - name: Unit Tests
+      run: 'set +e
+
+        (j2g_op test_backend; status=$?; j2g_op test_backend_post_always; post_status=$?;
+        if [ $status -ne 0 ]; then exit $status; else exit $post_status; fi) & pid1=$!
+
+        (j2g_op test_frontend; status=$?; j2g_op test_frontend_post_always; post_status=$?;
+        if [ $status -ne 0 ]; then exit $status; else exit $post_status; fi) & pid2=$!
+
+        wait $pid1; status1=$?
+
+        wait $pid2; status2=$?
+
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then exit 1; fi
+
+        '
+    - name: "SAST \u2014 SonarQube"
+      id: sast
+      run: j2g_op sast_sonarqube
+    - name: "SAST \u2014 SonarQube Post Always"
+      if: always() && steps.sast.outcome != 'skipped'
+      run: j2g_op sast_sonarqube_post_always
+    - name: Docker Build
+      run: 'set +e
+
+        j2g_op build_backend_image & pid1=$!
+
+        j2g_op build_frontend_image & pid2=$!
+
+        wait $pid1; status1=$?
+
+        wait $pid2; status2=$?
+
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ]; then exit 1; fi
+
+        '
+    - name: "Container Scan \u2014 Trivy"
+      run: 'set +e
+
+        j2g_op scan_backend_image & pid1=$!
+
+        j2g_op scan_frontend_image & pid2=$!
+
+        j2g_op filesystem_secret_scan & pid3=$!
+
+        wait $pid1; status1=$?
+
+        wait $pid2; status2=$?
+
+        wait $pid3; status3=$?
+
+        if [ $status1 -ne 0 ] || [ $status2 -ne 0 ] || [ $status3 -ne 0 ]; then exit
+        1; fi
+
+        '
+    - name: Push to Registry
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+      run: j2g_op push_to_registry
+    - name: Deploy to Staging
+      if: github.ref == 'refs/heads/main'
+      run: j2g_op deploy_to_staging
+    - name: "DAST \u2014 OWASP ZAP"
+      id: dast
+      if: github.ref == 'refs/heads/main'
+      run: j2g_op dast_owasp_zap
+    - name: "DAST \u2014 OWASP ZAP Post Always"
+      if: always() && steps.dast.outcome != 'skipped'
+      run: j2g_op dast_owasp_zap_post_always --writes /zap/reports/**
+    - name: Deploy to Production
+      if: github.ref == 'refs/heads/main'
+      run: j2g_op deploy_to_production
+    - name: Post Success
+      if: success()
+      run: j2g_op post_success
+    - name: Post Failure
+      if: failure()
+      run: j2g_op post_failure
+    - name: Post Always
+      if: always()
+      run: j2g_op post_always
+'on':
+  workflow_dispatch: null
